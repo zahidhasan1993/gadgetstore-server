@@ -3,8 +3,7 @@ import cors from "cors";
 import products from "./data/products.js";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-
-
+import productRoutes from "./routes/productRoutes.js";
 const port = 3000 || process.env.PORT;
 
 const app = express();
@@ -18,13 +17,8 @@ app.get("/", (req, res) => {
   res.send("GADGETSTORE SERVER IS RUNNING");
 });
 
-app.get("/api/products", (req, res) => {
-  res.send(products);
-});
-app.get("/api/products/:id", (req, res) => {
-  const singleProduct = products.find((p) => p._id === req.params.id);
-  res.send(singleProduct);
-});
+//product api
+app.use("/api/products", productRoutes);
 
 app.listen(port, () => {
   console.log(`app running ${process.env.NODE_STS} on port ${port}`);
