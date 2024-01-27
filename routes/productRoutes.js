@@ -14,12 +14,12 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const id = new ObjectId(req.params.id);
   const singleProduct = await Product.findById(id);
-if (singleProduct) {
-  res.send(singleProduct);
-}else{
-  res.status(404).send({message: "No Product found"})
-}
-  
+  if (singleProduct) {
+    res.send(singleProduct);
+  } else {
+    res.status(404).send({ message: "No Product found" })
+  }
+
 });
 
 export default router;

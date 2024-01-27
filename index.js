@@ -10,6 +10,9 @@ const app = express();
 //middlewares & DB Connection
 app.use(cors());
 dotenv.config();
+
+//mongodb connections
+
 connectDB();
 
 // all api's
