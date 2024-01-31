@@ -8,6 +8,7 @@ const port = 3000 || process.env.PORT;
 
 const app = express();
 //middlewares & DB Connection
+app.use(express.json())
 app.use(cors());
 dotenv.config();
 
@@ -27,7 +28,7 @@ app.use("/api/products", productRoutes);
 
 //user api
 
-app.use("/api/user", userRoutes);
+app.use("/api/users", userRoutes);
 
 //server listening
 

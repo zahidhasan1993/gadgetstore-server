@@ -1,13 +1,12 @@
 import express from "express";
-import User from "../models/userModel.js";
+import { authUser, getAllUser } from "../controller/userController.js";
 
 const router = express.Router();
+//get all users
+router.route("/").get(getAllUser);
 
-router.get("/", async (req, res) => {
-  const allUser = await User.find();
+//auth user POST
 
-  res.send(allUser);
-});
-
+router.post("/login", authUser)
 
 export default router;
