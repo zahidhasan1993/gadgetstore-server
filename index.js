@@ -7,7 +7,11 @@ import userRoutes from "./routes/userRoutes.js";
 const port = 3000 || process.env.PORT;
 
 const app = express();
+
+
 //middlewares & DB Connection
+
+
 app.use(express.json())
 app.use(cors());
 dotenv.config();

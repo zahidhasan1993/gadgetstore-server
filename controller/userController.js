@@ -3,6 +3,7 @@ import User from "../models/userModel.js";
 
 //get all users
 
+
 const getAllUser = async (req, res) => {
     const allUsers = await User.find();
     if (allUsers) {
