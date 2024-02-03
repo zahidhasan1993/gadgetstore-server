@@ -1,4 +1,5 @@
 import User from "../models/userModel.js";
+import generateToken from "../utils/generateToken.js";
 
 
 //get all users
@@ -27,7 +28,7 @@ const authUser = async (req, res) => {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            token: null
+            token: generateToken(user._id)
         })
     } else {
         res.status(402).send({ error: true, message: "unauthorized user" })
