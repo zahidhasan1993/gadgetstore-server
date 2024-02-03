@@ -18,7 +18,7 @@ const getAllUser = async (req, res) => {
 
 const authUser = async (req, res) => {
     const { email, password } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     const user = await User.findOne({ email: email, password: password })
     // console.log(user);
 
@@ -38,11 +38,57 @@ const authUser = async (req, res) => {
 // user profile (protectted)
 
 const userProfile = async (req, res) => {
-    res.send("success")
+    // console.log("come from user", req.user);
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+        })
+    } else {
+        res.status(401).send({ error: true, message: "Authorization Failed" })
+    }
 }
+
+//register user 
+
+
+const registerUser = async (req, res) => {
+    const { name, email, password } = req.body;
+    // console.log(req.body);
+    const userExist = await User.findOne({ email: email })
+
+    if (userExist) {
+        res.status(400).send({ error: true, message: "User all ready exist" })
+    }
+
+    const newUser = await User.create({
+        name,
+        email,
+        password
+    })
+
+
+    if (newUser) {
+        res.status(201).send({
+            _id: newUser._id,
+            name: newUser.name,
+            email: newUser.email,
+            isAdmin: newUser.isAdmin,
+        })
+    } else {
+        res.status(400).send({ error: true, message: "Invalid User" })
+    }
+
+}
+
 
 export {
     getAllUser,
     authUser,
-    userProfile
+    userProfile,
+    registerUser
 }
