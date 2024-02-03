@@ -18,7 +18,7 @@ const getAllUser = async (req, res) => {
 
 const authUser = async (req, res) => {
     const { email, password } = req.body;
-    // console.log(email);
+    console.log(req.body);
     const user = await User.findOne({ email: email, password: password })
     // console.log(user);
 
@@ -35,7 +35,14 @@ const authUser = async (req, res) => {
     }
 }
 
+// user profile (protectted)
+
+const userProfile = async (req, res) => {
+    res.send("success")
+}
+
 export {
     getAllUser,
-    authUser
+    authUser,
+    userProfile
 }
